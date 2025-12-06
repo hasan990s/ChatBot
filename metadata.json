@@ -1,0 +1,7 @@
+{
+  "name": "ChatBot",
+  "description": "Let's start ! Hurry !!!",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
