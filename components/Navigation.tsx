@@ -17,8 +17,8 @@ const Navigation: React.FC<NavigationProps> = ({ currentView, onNavigate }) => {
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-pink-100 md:relative md:w-64 md:h-screen md:border-t-0 md:border-r md:flex-col md:justify-start z-50 shadow-sm">
       <div className="p-6 hidden md:block">
-        <h1 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-600">
-          Bondhu AI
+        <h1 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 via-fuchsia-600 to-orange-500">
+          ChatBot
         </h1>
         <p className="text-xs text-slate-500 mt-1 font-medium">Virtual Social Hub</p>
       </div>

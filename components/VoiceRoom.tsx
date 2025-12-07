@@ -184,8 +184,8 @@ const VoiceRoom: React.FC<VoiceRoomProps> = ({ apiKey }) => {
       </div>
 
       <div className="z-10 text-center max-w-md w-full">
-        <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 mb-2">Voice Lounge</h2>
-        <p className="text-slate-600 mb-10 font-medium">Hang out and talk with Bondhu AI</p>
+        <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-fuchsia-600 to-orange-500 mb-2">Voice Lounge</h2>
+        <p className="text-slate-600 mb-10 font-medium">Hang out and talk with ChatBot</p>
 
         {/* Visualizer Circle */}
         <div className="relative w-56 h-56 mx-auto mb-12 flex items-center justify-center">

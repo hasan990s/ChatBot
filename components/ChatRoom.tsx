@@ -32,7 +32,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ apiKey }) => {
       chatSessionRef.current = ai.chats.create({
         model: 'gemini-2.5-flash',
         config: {
-          systemInstruction: 'You are a friendly, social AI host in a virtual lounge called "Bondhu AI". You are helpful, witty, and speak Bengali and English fluently. Keep responses concise and conversational.',
+          systemInstruction: 'You are a friendly, social AI host in a virtual lounge called "ChatBot". You are helpful, witty, and speak Bengali and English fluently. Keep responses concise and conversational.',
         },
       });
     }

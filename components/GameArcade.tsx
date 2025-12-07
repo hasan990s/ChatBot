@@ -153,7 +153,7 @@ const GameArcade: React.FC<GameArcadeProps> = ({ apiKey }) => {
   if (gameMode === 'MENU') {
     return (
       <div className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-indigo-50 via-white to-pink-50 p-6">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 mb-2">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-fuchsia-600 to-orange-500 mb-2">
           Game Arcade
         </h2>
         <p className="text-slate-500 mb-10 font-medium">Choose your challenge</p>
