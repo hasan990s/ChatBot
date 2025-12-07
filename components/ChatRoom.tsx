@@ -11,7 +11,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ apiKey }) => {
     {
       id: 'welcome',
       role: 'model',
-      text: 'Hello! Welcome to the Global Chat. I am your AI Host. We can talk about anything, or I can roleplay as other characters. How are you today?',
+      text: 'Hello! I am Gemnai, your AI host. Welcome to the lounge! I can chat, tell stories, or just hang out. What is on your mind?',
       timestamp: new Date()
     }
   ]);
@@ -32,7 +32,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ apiKey }) => {
       chatSessionRef.current = ai.chats.create({
         model: 'gemini-2.5-flash',
         config: {
-          systemInstruction: 'You are a friendly, social AI host in a virtual lounge called "ChatBot". You are helpful, witty, and speak Bengali and English fluently. Keep responses concise and conversational.',
+          systemInstruction: 'You are Gemnai, a smart, witty, and friendly AI host in a virtual social app called "ChatBot". You speak fluent Bengali and English. You love to chat, help users, and play text-based games. Keep responses conversational and concise.',
         },
       });
     }
@@ -99,7 +99,10 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ apiKey }) => {
           </div>
           <div>
             <h2 className="text-lg font-bold text-slate-800">Global Chat</h2>
-            <p className="text-xs text-pink-500 font-medium">128 Online (Simulated)</p>
+            <div className="flex items-center gap-1">
+              <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600">Gemnai</span>
+              <span className="text-xs text-slate-400">is active</span>
+            </div>
           </div>
         </div>
       </div>
@@ -108,13 +111,16 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ apiKey }) => {
         {messages.map((msg) => (
           <div
             key={msg.id}
-            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}
           >
+            {msg.role === 'model' && (
+              <span className="text-[10px] font-bold text-violet-600 mb-1 ml-1 tracking-wider uppercase">Gemnai ✨</span>
+            )}
             <div
               className={`max-w-[85%] md:max-w-[70%] rounded-2xl px-5 py-4 shadow-sm ${
                 msg.role === 'user'
-                  ? 'bg-gradient-to-br from-pink-500 to-rose-500 text-white rounded-tr-none'
-                  : 'bg-white text-slate-700 rounded-tl-none border border-slate-100'
+                  ? 'bg-gradient-to-br from-pink-500 to-rose-500 text-white rounded-tr-none shadow-pink-200'
+                  : 'bg-white text-slate-700 rounded-tl-none border border-slate-100 shadow-slate-100'
               }`}
             >
               <p className="whitespace-pre-wrap text-sm leading-relaxed font-medium">{msg.text}</p>
@@ -124,6 +130,15 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ apiKey }) => {
             </div>
           </div>
         ))}
+        {isLoading && (
+          <div className="flex items-start">
+             <div className="bg-white px-4 py-3 rounded-2xl rounded-tl-none border border-pink-100 flex items-center gap-2 shadow-sm">
+                <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce delay-75"></div>
+                <div className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce delay-150"></div>
+             </div>
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
 
@@ -134,7 +149,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ apiKey }) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Type a message..."
+            placeholder="Message Gemnai..."
             className="flex-1 bg-slate-50 border border-slate-200 text-slate-800 px-5 py-3 rounded-2xl focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 transition-all placeholder:text-slate-400 shadow-inner"
             disabled={isLoading}
           />
