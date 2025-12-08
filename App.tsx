@@ -8,16 +8,68 @@ import { ViewState } from './types';
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>(ViewState.HOME);
   
-  // In a real app, you might want to handle this differently, but for this demo,
-  // we access it directly. The prompt instructions guarantee this is available.
-  const apiKey = process.env.API_KEY || '';
+  // Logic to retrieve API Key safely for both Netlify/Vite and Playground environments
+  const getApiKey = (): string => {
+    // 1. Try Vite/Netlify environment variable
+    try {
+      // @ts-ignore
+      if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_KEY) {
+        // @ts-ignore
+        return import.meta.env.VITE_API_KEY;
+      }
+    } catch (e) {
+      // Ignore errors if import.meta is not available
+    }
+
+    // 2. Try standard process.env (Playground / Webpack)
+    try {
+      if (typeof process !== 'undefined' && process.env && process.env.API_KEY) {
+        return process.env.API_KEY;
+      }
+    } catch (e) {
+      // Ignore errors
+    }
+
+    return '';
+  };
+
+  const apiKey = getApiKey();
 
   if (!apiKey) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-800 p-4 text-center">
-        <div>
-           <h1 className="text-2xl font-bold text-red-500 mb-2">Configuration Error</h1>
-           <p className="text-slate-500">API_KEY environment variable is missing.</p>
+        <div className="max-w-md w-full bg-white p-8 rounded-3xl shadow-xl border border-pink-100">
+           <div className="text-5xl mb-6 animate-bounce">🔑</div>
+           <h1 className="text-2xl font-bold text-slate-800 mb-2">Setup Required</h1>
+           <p className="text-slate-500 mb-6">
+             Welcome to ChatBot! To start the social hub, you need to connect your Gemini API Key.
+           </p>
+           
+           <div className="text-left bg-slate-50 p-5 rounded-2xl border border-slate-100 text-sm mb-6">
+             <div className="flex items-center gap-2 mb-3 pb-3 border-b border-slate-200">
+                <span className="font-bold text-slate-700">How to Fix:</span>
+             </div>
+             
+             <div className="space-y-4">
+               <div>
+                  <p className="font-bold text-xs text-pink-500 uppercase tracking-wide mb-1">For Netlify / Vite Users</p>
+                  <code className="block bg-slate-800 text-green-400 p-2 rounded-lg font-mono text-xs break-all">
+                    VITE_API_KEY=your_key_here
+                  </code>
+                  <p className="text-xs text-slate-400 mt-1">Add this to your <b>.env</b> file or Netlify Environment Variables.</p>
+               </div>
+             </div>
+           </div>
+
+           <a 
+             href="https://aistudio.google.com/app/apikey" 
+             target="_blank" 
+             rel="noreferrer"
+             className="inline-flex items-center justify-center w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg shadow-pink-200"
+           >
+             Get Free API Key
+             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+           </a>
         </div>
       </div>
     );
@@ -121,7 +173,7 @@ const App: React.FC = () => {
                       Arcade
                     </h3>
                     <p className="text-slate-500 font-medium text-lg leading-relaxed">
-                      Challenge your skills in Trivia and Bullseye shooting games.
+                      Challenge your skills in Trivia, Bullseye, and Chicken Hunt.
                     </p>
                   </div>
 
